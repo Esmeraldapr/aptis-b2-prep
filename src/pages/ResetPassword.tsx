@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { ErrorMessage } from '../components/ErrorMessage'
+import { PasswordInput } from '../components/PasswordInput'
 
 export function ResetPassword() {
   const navigate = useNavigate()
@@ -40,13 +41,11 @@ export function ResetPassword() {
           {error && <ErrorMessage message={error} />}
           <label className="flex flex-col gap-1 text-sm font-medium text-slate-700">
             Nueva contraseña
-            <input
-              type="password"
+            <PasswordInput
               required
               minLength={6}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="rounded-lg border border-slate-300 px-3 py-2 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             />
           </label>
           <button

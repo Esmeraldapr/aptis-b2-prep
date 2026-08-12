@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
 import { ErrorMessage } from '../components/ErrorMessage'
 import { LevelBadge } from '../components/LevelBadge'
+import { PasswordInput } from '../components/PasswordInput'
 
 export function Profile() {
   const { profile, user, refreshProfile } = useAuth()
@@ -90,12 +91,10 @@ export function Profile() {
         {pwSaved && <p className="text-sm text-emerald-600">Contraseña actualizada ✓</p>}
         <label className="flex flex-col gap-1 text-sm font-medium text-slate-700">
           Nueva contraseña
-          <input
-            type="password"
+          <PasswordInput
             minLength={6}
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
-            className="rounded-lg border border-slate-300 px-3 py-2 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           />
         </label>
         <button
