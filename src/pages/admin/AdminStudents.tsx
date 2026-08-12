@@ -21,6 +21,8 @@ export function AdminStudents() {
               <th className="px-4 py-3">Cursos</th>
               <th className="px-4 py-3">Lecciones completadas</th>
               <th className="px-4 py-3">Puntuación total</th>
+              <th className="px-4 py-3">Última conexión</th>
+              <th className="px-4 py-3">Nº conexiones</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
@@ -34,6 +36,12 @@ export function AdminStudents() {
                 <td className="px-4 py-3">{s.cursos_matriculados}</td>
                 <td className="px-4 py-3">{s.lecciones_completadas}</td>
                 <td className="px-4 py-3">{s.puntuacion_total}</td>
+                <td className="px-4 py-3 text-slate-500">
+                  {s.ultima_conexion
+                    ? new Date(s.ultima_conexion).toLocaleString('es-ES', { dateStyle: 'short', timeStyle: 'short' })
+                    : '—'}
+                </td>
+                <td className="px-4 py-3">{s.numero_conexiones}</td>
               </tr>
             ))}
           </tbody>

@@ -37,10 +37,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     })
 
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, newSession) => {
+    const { data: listener } = supabase.auth.onAuthStateChange((event, newSession) => {
       setSession(newSession)
       if (newSession?.user) {
         loadProfile(newSession.user.id)
+        if (event === 'SIGNED_IN') {
+          supabase.rpc('record_login', { p_user_id: newSession.user.id }).then(() => loadProfile(newSession.user.id))
+        }
       } else {
         setProfile(null)
       }

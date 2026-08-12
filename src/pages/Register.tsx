@@ -95,9 +95,6 @@ export function Register() {
           Inicia sesión
         </Link>
       </p>
-      <p className="mt-6 text-center text-xs text-slate-400">
-        (También puedes habilitar el inicio de sesión con Google en el panel de Supabase → Authentication → Providers)
-      </p>
     </div>
   )
 }

@@ -30,6 +30,8 @@ export interface Database {
           nivel_actual: CourseLevel
           fecha_registro: string
           avatar_url: string | null
+          ultima_conexion: string | null
+          numero_conexiones: number
         }
         Insert: {
           id: string
@@ -39,6 +41,8 @@ export interface Database {
           nivel_actual?: CourseLevel
           fecha_registro?: string
           avatar_url?: string | null
+          ultima_conexion?: string | null
+          numero_conexiones?: number
         }
         Update: {
           id?: string
@@ -48,6 +52,8 @@ export interface Database {
           nivel_actual?: CourseLevel
           fecha_registro?: string
           avatar_url?: string | null
+          ultima_conexion?: string | null
+          numero_conexiones?: number
         }
         Relationships: []
       }
@@ -225,6 +231,10 @@ export interface Database {
       get_exercise_answer: {
         Args: { p_exercise_id: string }
         Returns: string
+      }
+      record_login: {
+        Args: { p_user_id: string }
+        Returns: undefined
       }
     }
     Enums: Record<string, never>
