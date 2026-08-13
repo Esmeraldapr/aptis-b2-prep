@@ -26,7 +26,7 @@ export function ResetPassword() {
       return
     }
     setDone(true)
-    setTimeout(() => navigate('/dashboard'), 1500)
+    setTimeout(() => navigate('/perfil'), 1500)
   }
 
   return (

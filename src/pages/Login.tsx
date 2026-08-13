@@ -31,7 +31,7 @@ export function Login() {
     } else {
       localStorage.removeItem(REMEMBER_KEY)
     }
-    const from = (location.state as { from?: string } | null)?.from ?? '/dashboard'
+    const from = (location.state as { from?: string } | null)?.from ?? '/perfil'
     navigate(from, { replace: true })
   }
 
