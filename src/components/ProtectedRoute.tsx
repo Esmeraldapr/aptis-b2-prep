@@ -9,7 +9,7 @@ export function ProtectedRoute({ children, staffOnly = false }: { children: Reac
   if (loading) return <LoadingSpinner label="Comprobando sesión..." />
   if (!user) return <Navigate to="/login" replace />
   if (staffOnly && profile && profile.rol !== 'teacher' && profile.rol !== 'admin') {
-    return <Navigate to="/dashboard" replace />
+    return <Navigate to="/" replace />
   }
   return <>{children}</>
 }

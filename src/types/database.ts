@@ -9,6 +9,7 @@ export type Role = 'student' | 'teacher' | 'admin'
 export type CourseLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2'
 export type ExerciseType = 'multiple_choice' | 'fill_blank' | 'listening' | 'writing'
 export type EnrollmentStatus = 'active' | 'completed' | 'dropped'
+export type Categoria = 'speaking' | 'writing' | 'grammar' | 'listening' | 'reading'
 
 export type Profile = Database['ingles']['Tables']['profiles']['Row']
 export type Course = Database['ingles']['Tables']['courses']['Row']
@@ -17,6 +18,8 @@ export type Exercise = Database['ingles']['Tables']['exercises']['Row']
 export type StudentProgress = Database['ingles']['Tables']['student_progress']['Row']
 export type Enrollment = Database['ingles']['Tables']['enrollments']['Row']
 export type Submission = Database['ingles']['Tables']['submissions']['Row']
+export type Contenido = Database['ingles']['Tables']['contenidos']['Row']
+export type ContenidoEjercicio = Database['ingles']['Tables']['contenido_ejercicios']['Row']
 
 export interface Database {
   ingles: {
@@ -225,6 +228,78 @@ export interface Database {
         }
         Relationships: []
       }
+      contenidos: {
+        Row: {
+          id: string
+          categoria: Categoria
+          titulo: string
+          descripcion: string | null
+          cuerpo: string | null
+          imagen_url: string | null
+          audio_url: string | null
+          order_index: number
+          created_by: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          categoria: Categoria
+          titulo: string
+          descripcion?: string | null
+          cuerpo?: string | null
+          imagen_url?: string | null
+          audio_url?: string | null
+          order_index?: number
+          created_by?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          categoria?: Categoria
+          titulo?: string
+          descripcion?: string | null
+          cuerpo?: string | null
+          imagen_url?: string | null
+          audio_url?: string | null
+          order_index?: number
+          created_by?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
+      contenido_ejercicios: {
+        Row: {
+          id: string
+          contenido_id: string
+          type: ExerciseType
+          question: string
+          options: Json | null
+          correct_answer: string
+          points: number
+          order_index: number
+        }
+        Insert: {
+          id?: string
+          contenido_id: string
+          type: ExerciseType
+          question: string
+          options?: Json | null
+          correct_answer: string
+          points?: number
+          order_index?: number
+        }
+        Update: {
+          id?: string
+          contenido_id?: string
+          type?: ExerciseType
+          question?: string
+          options?: Json | null
+          correct_answer?: string
+          points?: number
+          order_index?: number
+        }
+        Relationships: []
+      }
     }
     Views: Record<string, never>
     Functions: {
@@ -235,6 +310,10 @@ export interface Database {
       record_login: {
         Args: { p_user_id: string }
         Returns: undefined
+      }
+      check_content_answer: {
+        Args: { p_exercise_id: string; p_answer: string }
+        Returns: { is_correct: boolean | null; correct_answer: string | null }[]
       }
     }
     Enums: Record<string, never>
