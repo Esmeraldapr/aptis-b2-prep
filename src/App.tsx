@@ -12,20 +12,20 @@ const Login = lazy(() => import('./pages/Login').then((m) => ({ default: m.Login
 const Register = lazy(() => import('./pages/Register').then((m) => ({ default: m.Register })))
 const ForgotPassword = lazy(() => import('./pages/ForgotPassword').then((m) => ({ default: m.ForgotPassword })))
 const ResetPassword = lazy(() => import('./pages/ResetPassword').then((m) => ({ default: m.ResetPassword })))
-const Courses = lazy(() => import('./pages/Courses').then((m) => ({ default: m.Courses })))
-const CourseDetail = lazy(() => import('./pages/CourseDetail').then((m) => ({ default: m.CourseDetail })))
-const Lesson = lazy(() => import('./pages/Lesson').then((m) => ({ default: m.Lesson })))
-const Dashboard = lazy(() => import('./pages/Dashboard').then((m) => ({ default: m.Dashboard })))
-const Progress = lazy(() => import('./pages/Progress').then((m) => ({ default: m.Progress })))
+const ContenidosPorCategoria = lazy(() =>
+  import('./pages/ContenidosPorCategoria').then((m) => ({ default: m.ContenidosPorCategoria }))
+)
+const ContenidoDetalle = lazy(() =>
+  import('./pages/ContenidoDetalle').then((m) => ({ default: m.ContenidoDetalle }))
+)
 const Profile = lazy(() => import('./pages/Profile').then((m) => ({ default: m.Profile })))
 const AdminLayout = lazy(() => import('./pages/admin/AdminLayout').then((m) => ({ default: m.AdminLayout })))
 const AdminHome = lazy(() => import('./pages/admin/AdminHome').then((m) => ({ default: m.AdminHome })))
-const AdminCourses = lazy(() => import('./pages/admin/AdminCourses').then((m) => ({ default: m.AdminCourses })))
-const AdminCourseLessons = lazy(() =>
-  import('./pages/admin/AdminCourseLessons').then((m) => ({ default: m.AdminCourseLessons }))
+const AdminContenidos = lazy(() =>
+  import('./pages/admin/AdminContenidos').then((m) => ({ default: m.AdminContenidos }))
 )
-const AdminLessonExercises = lazy(() =>
-  import('./pages/admin/AdminLessonExercises').then((m) => ({ default: m.AdminLessonExercises }))
+const AdminContenidoEjercicios = lazy(() =>
+  import('./pages/admin/AdminContenidoEjercicios').then((m) => ({ default: m.AdminContenidoEjercicios }))
 )
 const AdminStudents = lazy(() => import('./pages/admin/AdminStudents').then((m) => ({ default: m.AdminStudents })))
 
@@ -47,32 +47,30 @@ export default function App() {
           <Route path="registro" element={<Register />} />
           <Route path="recuperar" element={<ForgotPassword />} />
           <Route path="reset-password" element={<ResetPassword />} />
-          <Route path="cursos" element={<Courses />} />
-          <Route path="cursos/:courseId" element={<CourseDetail />} />
+
+          {/* Pestañas públicas: acceso directo, sin login ni matrícula */}
           <Route
-            path="lecciones/:lessonId"
-            element={
-              <ProtectedRoute>
-                <Lesson />
-              </ProtectedRoute>
-            }
+            path="speaking"
+            element={<ContenidosPorCategoria categoria="speaking" titulo="Speaking" descripcion="Preguntas y respuestas modelo por partes del examen." />}
           />
           <Route
-            path="dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
+            path="writing"
+            element={<ContenidosPorCategoria categoria="writing" titulo="Writing" descripcion="Modelos, correcciones y práctica guiada de redacción." />}
           />
           <Route
-            path="progreso"
-            element={
-              <ProtectedRoute>
-                <Progress />
-              </ProtectedRoute>
-            }
+            path="gramatica"
+            element={<ContenidosPorCategoria categoria="grammar" titulo="Gramática" descripcion="Explicaciones y ejercicios de gramática con corrección automática." />}
           />
+          <Route
+            path="audios"
+            element={<ContenidosPorCategoria categoria="listening" titulo="Audios" descripcion="Listening y pronunciación." />}
+          />
+          <Route
+            path="lecturas"
+            element={<ContenidosPorCategoria categoria="reading" titulo="Lecturas" descripcion="Textos para practicar comprensión lectora." />}
+          />
+          <Route path="contenido/:contenidoId" element={<ContenidoDetalle />} />
+
           <Route
             path="perfil"
             element={
@@ -90,9 +88,8 @@ export default function App() {
             }
           >
             <Route index element={<AdminHome />} />
-            <Route path="cursos" element={<AdminCourses />} />
-            <Route path="cursos/:courseId/lecciones" element={<AdminCourseLessons />} />
-            <Route path="lecciones/:lessonId/ejercicios" element={<AdminLessonExercises />} />
+            <Route path="contenidos/:categoria" element={<AdminContenidos />} />
+            <Route path="contenidos/:categoria/:contenidoId/ejercicios" element={<AdminContenidoEjercicios />} />
             <Route path="alumnos" element={<AdminStudents />} />
           </Route>
           <Route path="*" element={<NotFound />} />

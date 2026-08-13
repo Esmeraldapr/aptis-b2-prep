@@ -5,6 +5,14 @@ const linkClass = ({ isActive }: { isActive: boolean }) =>
     isActive ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:bg-slate-100'
   }`
 
+const CATEGORIAS = [
+  { to: '/admin/contenidos/speaking', label: 'Speaking' },
+  { to: '/admin/contenidos/writing', label: 'Writing' },
+  { to: '/admin/contenidos/grammar', label: 'Gramática' },
+  { to: '/admin/contenidos/listening', label: 'Audios' },
+  { to: '/admin/contenidos/reading', label: 'Lecturas' },
+]
+
 export function AdminLayout() {
   return (
     <div className="flex flex-col gap-6 md:flex-row">
@@ -12,9 +20,11 @@ export function AdminLayout() {
         <NavLink to="/admin" end className={linkClass}>
           Resumen
         </NavLink>
-        <NavLink to="/admin/cursos" className={linkClass}>
-          Cursos
-        </NavLink>
+        {CATEGORIAS.map((c) => (
+          <NavLink key={c.to} to={c.to} className={linkClass}>
+            {c.label}
+          </NavLink>
+        ))}
         <NavLink to="/admin/alumnos" className={linkClass}>
           Alumnos
         </NavLink>
