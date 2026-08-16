@@ -3,6 +3,7 @@ import { useContenido, useContenidoEjercicios } from '../hooks/useContenidos'
 import { ContenidoEjercicioCard } from '../components/ContenidoEjercicioCard'
 import { LoadingSpinner } from '../components/LoadingSpinner'
 import { ErrorMessage } from '../components/ErrorMessage'
+import { ListenButton } from '../components/ListenButton'
 
 const CATEGORIA_PATH: Record<string, string> = {
   speaking: '/speaking',
@@ -40,7 +41,10 @@ export function ContenidoDetalle() {
       </Link>
 
       <div>
-        <h1 className="text-3xl font-bold text-slate-900">{contenido.titulo}</h1>
+        <div className="flex flex-wrap items-center gap-3">
+          <h1 className="text-3xl font-bold text-slate-900">{contenido.titulo}</h1>
+          {contenido.cuerpo && <ListenButton text={contenido.cuerpo} label="Escuchar todo" />}
+        </div>
         {contenido.descripcion && <p className="mt-2 max-w-2xl text-slate-600">{contenido.descripcion}</p>}
       </div>
 

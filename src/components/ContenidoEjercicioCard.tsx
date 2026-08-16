@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { ContenidoEjercicio } from '../types/database'
 import { checkContentAnswer } from '../lib/checkContentAnswer'
+import { ListenButton } from './ListenButton'
 
 const TYPE_LABEL: Record<ContenidoEjercicio['type'], string> = {
   multiple_choice: 'Opción múltiple',
@@ -42,7 +43,10 @@ export function ContenidoEjercicioCard({ exercise, index }: { exercise: Contenid
         </span>
         <span className="ml-auto text-xs text-slate-400">{exercise.points} pts</span>
       </div>
-      <p className="mb-4 font-medium text-slate-800">{exercise.question}</p>
+      <div className="mb-4 flex items-start justify-between gap-3">
+        <p className="font-medium text-slate-800">{exercise.question}</p>
+        <ListenButton text={exercise.question} label="Escuchar" size="sm" />
+      </div>
 
       {exercise.type === 'multiple_choice' && options ? (
         <fieldset className="flex flex-col gap-2" disabled={!!result}>
@@ -61,7 +65,7 @@ export function ContenidoEjercicioCard({ exercise, index }: { exercise: Contenid
                 checked={answer === opt}
                 onChange={(e) => setAnswer(e.target.value)}
               />
-              {opt}
+              <span className="flex-1">{opt}</span>
             </label>
           ))}
         </fieldset>
