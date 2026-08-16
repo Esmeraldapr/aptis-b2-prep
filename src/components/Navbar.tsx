@@ -10,6 +10,7 @@ const TABS = [
   { to: '/speaking', label: 'Speaking' },
   { to: '/writing', label: 'Writing' },
   { to: '/gramatica', label: 'Gramática' },
+  { to: '/vocabulario', label: 'Vocabulario' },
   { to: '/audios', label: 'Audios' },
   { to: '/lecturas', label: 'Lecturas' },
 ]

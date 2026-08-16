@@ -4,6 +4,7 @@ const TABS = [
   { to: '/speaking', emoji: '🗣️', label: 'Speaking', desc: 'Preguntas y respuestas modelo por partes' },
   { to: '/writing', emoji: '✍️', label: 'Writing', desc: 'Modelos, correcciones y práctica guiada' },
   { to: '/gramatica', emoji: '📚', label: 'Gramática', desc: 'Explicaciones y ejercicios autocorregidos' },
+  { to: '/vocabulario', emoji: '🧠', label: 'Vocabulario', desc: 'Palabras, collocations y phrasal verbs traducidos' },
   { to: '/audios', emoji: '🎧', label: 'Audios', desc: 'Listening y pronunciación' },
   { to: '/lecturas', emoji: '📖', label: 'Lecturas', desc: 'Textos para practicar comprensión lectora' },
 ]
@@ -19,8 +20,8 @@ export function Landing() {
           Practica inglés directamente, sin registrarte
         </h1>
         <p className="max-w-2xl text-lg text-slate-600">
-          Entra en cualquier pestaña y practica al momento: Speaking, Writing, Gramática, Audios y Lecturas, con
-          ejercicios que se corrigen solos.
+          Entra en cualquier pestaña y practica al momento: Speaking, Writing, Gramática, Vocabulario, Audios y
+          Lecturas, con ejercicios que se corrigen solos.
         </p>
       </section>
 

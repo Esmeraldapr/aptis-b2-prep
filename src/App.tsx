@@ -69,6 +69,10 @@ export default function App() {
             path="lecturas"
             element={<ContenidosPorCategoria categoria="reading" titulo="Lecturas" descripcion="Textos para practicar comprensión lectora." />}
           />
+          <Route
+            path="vocabulario"
+            element={<ContenidosPorCategoria categoria="vocabulary" titulo="Vocabulario" descripcion="Vocabulario, collocations, phrasal verbs y falsos amigos, todo traducido y con ejemplos." />}
+          />
           <Route path="contenido/:contenidoId" element={<ContenidoDetalle />} />
 
           <Route

@@ -9,6 +9,7 @@ const CATEGORIAS = [
   { to: '/admin/contenidos/speaking', label: 'Speaking' },
   { to: '/admin/contenidos/writing', label: 'Writing' },
   { to: '/admin/contenidos/grammar', label: 'Gramática' },
+  { to: '/admin/contenidos/vocabulary', label: 'Vocabulario' },
   { to: '/admin/contenidos/listening', label: 'Audios' },
   { to: '/admin/contenidos/reading', label: 'Lecturas' },
 ]

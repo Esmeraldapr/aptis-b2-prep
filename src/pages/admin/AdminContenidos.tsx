@@ -10,6 +10,7 @@ const LABELS: Record<Categoria, string> = {
   speaking: 'Speaking',
   writing: 'Writing',
   grammar: 'Gramática',
+  vocabulary: 'Vocabulario',
   listening: 'Audios',
   reading: 'Lecturas',
 }

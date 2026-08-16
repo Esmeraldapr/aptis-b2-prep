@@ -9,7 +9,7 @@ export type Role = 'student' | 'teacher' | 'admin'
 export type CourseLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2'
 export type ExerciseType = 'multiple_choice' | 'fill_blank' | 'listening' | 'writing'
 export type EnrollmentStatus = 'active' | 'completed' | 'dropped'
-export type Categoria = 'speaking' | 'writing' | 'grammar' | 'listening' | 'reading'
+export type Categoria = 'speaking' | 'writing' | 'grammar' | 'listening' | 'reading' | 'vocabulary'
 
 export type Profile = Database['ingles']['Tables']['profiles']['Row']
 export type Course = Database['ingles']['Tables']['courses']['Row']

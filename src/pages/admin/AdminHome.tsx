@@ -6,6 +6,7 @@ const CATEGORIAS = [
   { categoria: 'speaking' as const, to: '/admin/contenidos/speaking', label: 'Speaking' },
   { categoria: 'writing' as const, to: '/admin/contenidos/writing', label: 'Writing' },
   { categoria: 'grammar' as const, to: '/admin/contenidos/grammar', label: 'Gramática' },
+  { categoria: 'vocabulary' as const, to: '/admin/contenidos/vocabulary', label: 'Vocabulario' },
   { categoria: 'listening' as const, to: '/admin/contenidos/listening', label: 'Audios' },
   { categoria: 'reading' as const, to: '/admin/contenidos/reading', label: 'Lecturas' },
 ]

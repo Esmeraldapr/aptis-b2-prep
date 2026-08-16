@@ -8,6 +8,7 @@ const CATEGORIA_PATH: Record<string, string> = {
   speaking: '/speaking',
   writing: '/writing',
   grammar: '/gramatica',
+  vocabulary: '/vocabulario',
   listening: '/audios',
   reading: '/lecturas',
 }
@@ -16,6 +17,7 @@ const CATEGORIA_LABEL: Record<string, string> = {
   speaking: 'Speaking',
   writing: 'Writing',
   grammar: 'Gramática',
+  vocabulary: 'Vocabulario',
   listening: 'Audios',
   reading: 'Lecturas',
 }
