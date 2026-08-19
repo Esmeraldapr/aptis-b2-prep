@@ -38,7 +38,7 @@ export function useContenidoEjercicios(contenidoId: string | undefined) {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('contenido_ejercicios')
-        .select('id, contenido_id, type, question, options, points, order_index')
+        .select('id, contenido_id, type, question, options, points, order_index, imagen_url')
         .eq('contenido_id', contenidoId!)
         .order('order_index', { ascending: true })
       if (error) throw error

@@ -8,6 +8,7 @@ const TYPE_LABEL: Record<ContenidoEjercicio['type'], string> = {
   fill_blank: 'Completar el hueco',
   listening: 'Listening',
   writing: 'Writing',
+  speaking: 'Speaking',
 }
 
 export function ContenidoEjercicioCard({ exercise, index }: { exercise: ContenidoEjercicio; index: number }) {
@@ -15,6 +16,7 @@ export function ContenidoEjercicioCard({ exercise, index }: { exercise: Contenid
   const [submitting, setSubmitting] = useState(false)
   const [result, setResult] = useState<{ is_correct: boolean | null; correct_answer: string | null } | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [practiced, setPracticed] = useState(false)
 
   async function handleSubmit() {
     if (!answer.trim()) return
@@ -48,7 +50,23 @@ export function ContenidoEjercicioCard({ exercise, index }: { exercise: Contenid
         <ListenButton text={exercise.question} label="Escuchar" size="sm" />
       </div>
 
-      {exercise.type === 'multiple_choice' && options ? (
+      {exercise.imagen_url && (
+        <div className="mb-4 overflow-hidden rounded-lg border border-slate-200 bg-slate-100">
+          <img src={exercise.imagen_url} alt="" className="w-full object-cover" />
+        </div>
+      )}
+
+      {exercise.type === 'speaking' ? (
+        <button
+          onClick={() => setPracticed(true)}
+          disabled={practiced}
+          className={`rounded-lg px-4 py-2 text-sm font-semibold transition ${
+            practiced ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-600 text-white hover:bg-indigo-700'
+          }`}
+        >
+          {practiced ? '¡Practicado! 🎉' : 'Marcar como practicado'}
+        </button>
+      ) : exercise.type === 'multiple_choice' && options ? (
         <fieldset className="flex flex-col gap-2" disabled={!!result}>
           <legend className="sr-only">Opciones</legend>
           {options.map((opt) => (
@@ -89,33 +107,34 @@ export function ContenidoEjercicioCard({ exercise, index }: { exercise: Contenid
         />
       )}
 
-      {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
+      {exercise.type !== 'speaking' && error && <p className="mt-3 text-sm text-red-600">{error}</p>}
 
-      {!result ? (
-        <button
-          onClick={handleSubmit}
-          disabled={submitting || !answer.trim()}
-          className="mt-4 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50"
-        >
-          {submitting ? 'Corrigiendo...' : 'Comprobar respuesta'}
-        </button>
-      ) : (
-        <div
-          className={`mt-4 rounded-lg px-3 py-2 text-sm font-medium ${
-            result.is_correct === null
-              ? 'bg-slate-100 text-slate-600'
+      {exercise.type !== 'speaking' &&
+        (!result ? (
+          <button
+            onClick={handleSubmit}
+            disabled={submitting || !answer.trim()}
+            className="mt-4 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50"
+          >
+            {submitting ? 'Corrigiendo...' : 'Comprobar respuesta'}
+          </button>
+        ) : (
+          <div
+            className={`mt-4 rounded-lg px-3 py-2 text-sm font-medium ${
+              result.is_correct === null
+                ? 'bg-slate-100 text-slate-600'
+                : result.is_correct
+                  ? 'bg-emerald-100 text-emerald-700'
+                  : 'bg-red-100 text-red-700'
+            }`}
+          >
+            {result.is_correct === null
+              ? 'Respuesta guardada. Este ejercicio se corrige de forma cualitativa, no hay una única respuesta correcta.'
               : result.is_correct
-                ? 'bg-emerald-100 text-emerald-700'
-                : 'bg-red-100 text-red-700'
-          }`}
-        >
-          {result.is_correct === null
-            ? 'Respuesta guardada. Este ejercicio se corrige de forma cualitativa, no hay una única respuesta correcta.'
-            : result.is_correct
-              ? '¡Correcto! 🎉'
-              : `Incorrecto. La respuesta correcta es: "${result.correct_answer ?? '—'}"`}
-        </div>
-      )}
+                ? '¡Correcto! 🎉'
+                : `Incorrecto. La respuesta correcta es: "${result.correct_answer ?? '—'}"`}
+          </div>
+        ))}
     </div>
   )
 }

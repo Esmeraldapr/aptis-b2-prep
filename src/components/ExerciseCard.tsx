@@ -7,6 +7,7 @@ const TYPE_LABEL: Record<Exercise['type'], string> = {
   fill_blank: 'Completar el hueco',
   listening: 'Listening',
   writing: 'Writing',
+  speaking: 'Speaking',
 }
 
 export function ExerciseCard({

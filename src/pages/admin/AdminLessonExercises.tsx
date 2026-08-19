@@ -18,6 +18,7 @@ const TYPE_LABEL: Record<ExerciseType, string> = {
   fill_blank: 'Completar hueco',
   listening: 'Listening',
   writing: 'Writing',
+  speaking: 'Speaking',
 }
 
 const emptyForm = { type: 'multiple_choice' as ExerciseType, question: '', optionsText: '', correct_answer: '', points: 10 }

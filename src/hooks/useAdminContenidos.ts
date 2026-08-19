@@ -63,6 +63,7 @@ export interface ContenidoEjercicioInput {
   correct_answer: string
   points: number
   order_index: number
+  imagen_url?: string | null
 }
 
 export function useCreateContenidoEjercicio() {
@@ -72,7 +73,7 @@ export function useCreateContenidoEjercicio() {
       const { data, error } = await supabase
         .from('contenido_ejercicios')
         .insert(input)
-        .select('id, contenido_id, type, question, options, points, order_index')
+        .select('id, contenido_id, type, question, options, points, order_index, imagen_url')
         .single()
       if (error) throw error
       return data as unknown as ContenidoEjercicio

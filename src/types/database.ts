@@ -7,7 +7,7 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 
 export type Role = 'student' | 'teacher' | 'admin'
 export type CourseLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2'
-export type ExerciseType = 'multiple_choice' | 'fill_blank' | 'listening' | 'writing'
+export type ExerciseType = 'multiple_choice' | 'fill_blank' | 'listening' | 'writing' | 'speaking'
 export type EnrollmentStatus = 'active' | 'completed' | 'dropped'
 export type Categoria = 'speaking' | 'writing' | 'grammar' | 'listening' | 'reading' | 'vocabulary'
 
@@ -277,6 +277,7 @@ export interface Database {
           correct_answer: string
           points: number
           order_index: number
+          imagen_url: string | null
         }
         Insert: {
           id?: string
@@ -287,6 +288,7 @@ export interface Database {
           correct_answer: string
           points?: number
           order_index?: number
+          imagen_url?: string | null
         }
         Update: {
           id?: string
@@ -297,6 +299,7 @@ export interface Database {
           correct_answer?: string
           points?: number
           order_index?: number
+          imagen_url?: string | null
         }
         Relationships: []
       }

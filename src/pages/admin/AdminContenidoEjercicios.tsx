@@ -11,15 +11,24 @@ import { LoadingSpinner } from '../../components/LoadingSpinner'
 import { ErrorMessage } from '../../components/ErrorMessage'
 import type { Categoria, ContenidoEjercicio, ExerciseType } from '../../types/database'
 
-const TYPES: ExerciseType[] = ['multiple_choice', 'fill_blank', 'listening', 'writing']
+const TYPES: ExerciseType[] = ['multiple_choice', 'fill_blank', 'listening', 'writing', 'speaking']
 const TYPE_LABEL: Record<ExerciseType, string> = {
   multiple_choice: 'Opción múltiple',
   fill_blank: 'Completar hueco',
   listening: 'Listening',
   writing: 'Writing',
+  speaking: 'Speaking',
 }
 
-const emptyForm = { type: 'multiple_choice' as ExerciseType, question: '', optionsText: '', correct_answer: '', points: 10, order_index: 0 }
+const emptyForm = {
+  type: 'multiple_choice' as ExerciseType,
+  question: '',
+  optionsText: '',
+  correct_answer: '',
+  points: 10,
+  order_index: 0,
+  imagen_url: '',
+}
 
 export function AdminContenidoEjercicios() {
   const { categoria, contenidoId } = useParams<{ categoria: Categoria; contenidoId: string }>()
@@ -51,6 +60,7 @@ export function AdminContenidoEjercicios() {
       correct_answer: '',
       points: e.points,
       order_index: e.order_index,
+      imagen_url: e.imagen_url ?? '',
     })
     setFormOpen(true)
   }
@@ -64,7 +74,7 @@ export function AdminContenidoEjercicios() {
         ? form.optionsText.split(',').map((o) => o.trim()).filter(Boolean)
         : null
 
-    if (editing && !form.correct_answer.trim()) {
+    if (form.type !== 'speaking' && editing && !form.correct_answer.trim()) {
       setFormError('Introduce la respuesta correcta para guardar los cambios (por seguridad no se muestra la anterior).')
       return
     }
@@ -74,9 +84,10 @@ export function AdminContenidoEjercicios() {
       type: form.type,
       question: form.question,
       options,
-      correct_answer: form.correct_answer,
+      correct_answer: form.type === 'speaking' ? '' : form.correct_answer,
       points: form.points,
       order_index: form.order_index,
+      imagen_url: form.imagen_url.trim() || null,
     }
 
     try {
@@ -166,14 +177,24 @@ export function AdminContenidoEjercicios() {
             </label>
           )}
           <label className="flex flex-col gap-1 text-sm font-medium text-slate-700">
-            Respuesta correcta {editing && <span className="font-normal text-slate-400">(vuelve a escribirla para guardar cambios)</span>}
+            Imagen (URL, opcional — para ejercicios de Speaking)
             <input
-              required
-              value={form.correct_answer}
-              onChange={(e) => setForm((f) => ({ ...f, correct_answer: e.target.value }))}
+              value={form.imagen_url}
+              onChange={(e) => setForm((f) => ({ ...f, imagen_url: e.target.value }))}
               className="rounded-lg border border-slate-300 px-3 py-2"
             />
           </label>
+          {form.type !== 'speaking' && (
+            <label className="flex flex-col gap-1 text-sm font-medium text-slate-700">
+              Respuesta correcta {editing && <span className="font-normal text-slate-400">(vuelve a escribirla para guardar cambios)</span>}
+              <input
+                required
+                value={form.correct_answer}
+                onChange={(e) => setForm((f) => ({ ...f, correct_answer: e.target.value }))}
+                className="rounded-lg border border-slate-300 px-3 py-2"
+              />
+            </label>
+          )}
           <div className="flex gap-2">
             <button
               type="submit"
